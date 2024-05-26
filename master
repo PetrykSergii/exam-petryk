@@ -1,0 +1,15 @@
+---
+- name: Deploy main branch
+  hosts: Azure
+  become: true
+  tasks:
+    - name: Clone main branch from GitLab
+      git:
+        repo: https://gitlab.com/staskuznetsov/site.git
+        dest: /tmp/site_main
+        version: main
+
+    - name: Copy index.html from main branch to nginx web root
+      copy:
+        src: /tmp/site_main/index.html
+        dest: /usr/share/nginx/html/index.html
