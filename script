@@ -1,0 +1,9 @@
+PRIVATE_KEY="/home/sergii/.ssh/id_rsa"
+
+PLAYBOOK_DEV="deploy_dev.yml"
+
+PLAYBOOK_MAIN="deploy_main.yml"
+
+ansible-playbook $PLAYBOOK_DEV --private-key=$PRIVATE_KEY
+
+ansible-playbook $PLAYBOOK_MAIN --private-key=$PRIVATE_KEY
