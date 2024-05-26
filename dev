@@ -1,0 +1,16 @@
+---
+- name: Deploy dev branch
+  hosts: Azure
+  become: true
+  tasks:
+    - name: Clone dev branch from GitLab
+      git:
+        repo: https://gitlab.com/staskuznetsov/site.git
+        dest: /tmp/site_dev
+        version: dev
+
+    - name: Copy index.html from dev branch to nginx web root on prod2
+      copy:
+        src: /tmp/site_dev/index.html
+        dest: /var/www/html/index.html
+      when: ansible_host == "20.121.117.78"
